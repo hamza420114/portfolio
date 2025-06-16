@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigitalClock</title>
+    <style>
+        body{
+            background:radial-gradient(ellipse at center,#0a2e38 0%,#000 35%); 
+        }
+        #clock{
+            font-family:'Share Tech Mono',monospace;
+            text-align:center;
+            color:#daf6ff;
+            text-shadow;0 0 20px rgba(10,175,230,1),0 020px rgba(10 175 230 0);
+        }
+        .date{
+            letter-spacing:0.1em;
+            font-size:24px;
+        }
+        .time{
+            letter-spacing:0.5em;
+            font-size:80px;
+            padding:5px 0;
+        }
+        .text{
+            letter-spacing:0.1em;
+            font-size:12px;
+            padding:20px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="clock">
+        <p class="date">2023-09-07 SUN</p>
+        <p class="time">11:03:09</p>
+        <p class="text">Digital Clock by HAMZA RIAZ</p>
+    </div>
+    <script>
+        const daysOfWeek = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+        const $time = document.querySelector('.time');
+        const $date = document.querySelector('.date');
+        function padStart(value,length){
+            return String(value).padStart(length,0);
+        }
+        function update(){
+            const now = new Date();
+            const[hours,minutes,seconds,year,month,date,day,]=[now.getHours(),now.getMinutes(),now.getSeconds(),now.getFullYear(),now.getMonth(),now.getDate(),now.getDay(),];
+            $time.innerText = `${padStart(hours,2)}:${padStart(minutes,2)}:${padStart(seconds,2)}`;
+            $date.innerText = `${padStart(year,4)}-${padStart(month+1,2)}-${padStart(date,2)} ${daysOfWeek[day]}`
+        }
+            update();
+            setInterval(update,1000);
+    </script>
+    
+</body>
+</html>
+
