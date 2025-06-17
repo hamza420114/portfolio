@@ -4,29 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DigitalClock</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-        body{
-            background:radial-gradient(ellipse at center,#0a2e38 0%,#000 35%); 
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(ellipse at center, #0a2e38 0%, #000 35%);
         }
-        #clock{
-            font-family:'Share Tech Mono',monospace;
-            text-align:center;
-            color:#daf6ff;
-            text-shadow;0 0 20px rgba(10,175,230,1),0 020px rgba(10 175 230 0);
+        
+        #clock {
+            font-family: 'Share Tech Mono', monospace;
+            text-align: center;
+            color: #daf6ff;
+            text-shadow: 0 0 20px rgba(10, 175, 230, 1), 0 0 20px rgba(10, 175, 230, 0);
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        .date{
-            letter-spacing:0.1em;
-            font-size:24px;
+        
+        .date {
+            letter-spacing: 0.1em;
+            font-size: clamp(16px, 4vw, 24px);
+            margin-bottom: 10px;
         }
-        .time{
-            letter-spacing:0.5em;
-            font-size:80px;
-            padding:5px 0;
+        
+        .time {
+            letter-spacing: 0.05em;
+            font-size: clamp(40px, 15vw, 80px);
+            padding: 10px 0;
+            margin: 0;
         }
-        .text{
-            letter-spacing:0.1em;
-            font-size:12px;
-            padding:20px 0 0;
+        
+        .text {
+            letter-spacing: 0.1em;
+            font-size: clamp(10px, 3vw, 12px);
+            padding: 20px 0 0;
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .time {
+                letter-spacing: 0.02em;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .time {
+                letter-spacing: 0;
+            }
         }
     </style>
 </head>
@@ -40,19 +70,27 @@
         const daysOfWeek = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
         const $time = document.querySelector('.time');
         const $date = document.querySelector('.date');
-        function padStart(value,length){
-            return String(value).padStart(length,0);
+        
+        function padStart(value, length) {
+            return String(value).padStart(length, '0');
         }
-        function update(){
+        
+        function update() {
             const now = new Date();
-            const[hours,minutes,seconds,year,month,date,day,]=[now.getHours(),now.getMinutes(),now.getSeconds(),now.getFullYear(),now.getMonth(),now.getDate(),now.getDay(),];
-            $time.innerText = `${padStart(hours,2)}:${padStart(minutes,2)}:${padStart(seconds,2)}`;
-            $date.innerText = `${padStart(year,4)}-${padStart(month+1,2)}-${padStart(date,2)} ${daysOfWeek[day]}`
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const year = now.getFullYear();
+            const month = now.getMonth();
+            const date = now.getDate();
+            const day = now.getDay();
+            
+            $time.innerText = `${padStart(hours, 2)}:${padStart(minutes, 2)}:${padStart(seconds, 2)}`;
+            $date.innerText = `${padStart(year, 4)}-${padStart(month + 1, 2)}-${padStart(date, 2)} ${daysOfWeek[day]}`;
         }
-            update();
-            setInterval(update,1000);
+        
+        update();
+        setInterval(update, 1000);
     </script>
-    
 </body>
 </html>
-
